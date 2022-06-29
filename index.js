@@ -71,7 +71,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get('/', (req, res) => {
-  res.send('Welcome to mango jelly ')
+  res.send('Welcome to mango jelly server ')
 })
 
 app.listen(port, () => {
