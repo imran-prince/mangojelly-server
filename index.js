@@ -28,12 +28,34 @@ async function run() {
       res.send(result)
 
     })
-    app.delete('/product/:id',  async (req, res) => {
+    app.delete('/product/:id', async (req, res) => {
       const id = req.params.id
       const query = { _id: ObjectId(id) }
       const result = await productCollection.deleteOne(query)
       res.send(result)
     })
+    app.put('/product/:id', async (req, res) => {
+      const id = req.params.id
+      const updateproduct = req.body
+      const filter = { _id: ObjectId(id) }
+      const option = { upsert: true }
+      const updatedoc = {
+ 
+        $set: {
+         brand:updateproduct.brand,
+         phone_name:updateproduct.pname,
+         description:updateproduct.desc,
+         display:updateproduct.display,
+         storage:updateproduct.storage,
+         ram:updateproduct.ram
+
+        }
+      }
+      const result = await productCollection.updateOne(filter, updatedoc, option)
+      res.send(result)
+
+    })
+
 
   } finally {
 
